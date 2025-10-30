@@ -2,24 +2,20 @@ local config = require("plugins.configs.lspconfig")
 local on_attach = config.on_attach
 local capabilities = config.capabilities
 
-local lspconfig = require("lspconfig")
+capabilities.offsetEncoding = { "utf-16" }
 
--- Ruff for linting/formatting
-lspconfig.ruff.setup {
+-- Python
+vim.lsp.config.pyright = {
   on_attach = on_attach,
   capabilities = capabilities,
   filetypes = {"python"},
 }
+vim.lsp.enable('pyright')
 
--- Pyright for type checking
-lspconfig.pyright.setup {
+vim.lsp.config.ruff = {
   on_attach = on_attach,
   capabilities = capabilities,
-  settings = {
-    pyright = {
-      disableOrganizeImports = true,  -- Let Ruff handle imports
-    },
-  },
   filetypes = {"python"},
 }
+vim.lsp.enable('ruff')
 
